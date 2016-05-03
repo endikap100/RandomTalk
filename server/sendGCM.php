@@ -24,7 +24,7 @@ try {
 } catch (Exception $e) {
 	break;
 }
-define( 'API_ACCESS_KEY', 'AIzaSyDm0qcZRNdaaJoAZG1OoOHWV7oZvEWfEkI' );
+define( 'API_ACCESS_KEY', 'AIzaSyCehY7hp8LZTeTR4H_la8w0AIrmEPz82wc' );
 
 // prep the bundle
 $msg = array
