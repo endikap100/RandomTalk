@@ -2,6 +2,7 @@
 // API access key from Google API's Console
 $registrationIds = [];
 try {
+//TODO
 	$mysqli = mysqli_connect("localhost","Xjnieto011","LXr19KrVEe","Xjnieto011_...");
 
 	if ($stmt = $mysqli->prepare("SELECT id FROM Dispositivos")) {

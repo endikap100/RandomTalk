@@ -23,19 +23,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    public static String ObtenerRegistrationTokenEnGcm(Context context)
-    {
-        InstanceID instanceID = InstanceID.getInstance(context);
-        String token = null;
-        try {
-            token = instanceID.getToken("349004489598",
-                    GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
-        return token;
-    }
 
 
     public static String RegistrarseEnAplicacionServidor(Context context,String registrationToken2) throws  Exception
