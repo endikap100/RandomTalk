@@ -20,7 +20,7 @@
 
 			while ($row = mysqli_fetch_array($emaitza)){
 				$loged = TRUE;
-				if ($mysqli->query("INSERT INTO 'usuarios' (reg_id) values ('".$id."') ON DUPLICATE KEY UPDATE reg_id = values(reg_id)") === TRUE){
+				if ($mysqli->query("INSERT INTO 'usuarios' (reg_id) values ('".$id."') ON DUPLICATE KEY UPDATE reg_id = values('".$id."')") === TRUE){
 					$loged = FALSE;
 				}
 			}
