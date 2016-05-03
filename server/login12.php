@@ -14,6 +14,7 @@
 			// 03. Perform queries:
 			$user = $_POST['user'];
 			$password = $_POST['password'];
+			$id = $_POST['rId'];
 			$loged = FALSE;
 			$emaitza = mysqli_query($con, "SELECT * FROM `usuarios` WHERE nick = '".$user."' AND pass = '".$password."'");
 
