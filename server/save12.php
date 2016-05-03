@@ -14,7 +14,7 @@
 			// 03. Perform queries:
 			$user = $_POST['user'];
 			$password = $_POST['password'];
-			mysqli_query($con, "INSERT INTO `usuarios` (`usuario`, `password`) VALUES ('".$user."','".$password."')");
+			mysqli_query($con, "INSERT INTO `usuarios` (`nick`, `pass`) VALUES ('".$user."','".$password."')");
 			// 04. Close connection:
 			mysqli_close($con);
 

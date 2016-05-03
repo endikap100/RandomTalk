@@ -32,11 +32,11 @@ public class MiInstanceIdListenerService extends InstanceIDListenerService {
             try {
 
                 publishProgress("Obteniendo Registration Token en GCM Servers...");
-                String registrationToken = MainLogin.ObtenerRegistrationTokenEnGcm(getApplicationContext());
+                //String registrationToken = MainLogin.ObtenerRegistrationTokenEnGcm(getApplicationContext());
 
                 publishProgress("Enviando Registration a mi aplicacion servidor...");
-                String respuesta = MainActivity.RegistrarseEnAplicacionServidor(getApplicationContext(),registrationToken);
-                return respuesta;
+                //String respuesta = MainActivity.RegistrarseEnAplicacionServidor(getApplicationContext(),registrationToken);
+                return null;
             }
             catch (Exception ex){
                 return ex;
