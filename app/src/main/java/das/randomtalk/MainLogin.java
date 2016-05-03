@@ -14,6 +14,7 @@ public class MainLogin extends /*AppCompat*/Activity implements DoHTTPRequest.As
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
     }
+
     public void login(View v){
         boolean loged = false;
 
