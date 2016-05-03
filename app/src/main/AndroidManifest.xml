@@ -36,6 +36,35 @@
         </activity>
         <activity android:name=".Signup"></activity>
 
+        <!--RECEIVER-->
+        <receiver
+            android:name="com.google.android.gms.gcm.GcmReceiver"
+            android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <category android:name="com.example.gcm" />
+            </intent-filter>
+        </receiver>
+
+        <!--LISTENER-->
+        <service
+            android:name="das.randomtalk.MiGcmListenerService"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+            </intent-filter>
+        </service>
+
+        <!--INSTANCE ID LISTENER-->
+        <service
+            android:name="das.randomtalk.MiInstanceIdListenerService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.android.gms.iid.InstanceID"/>
+            </intent-filter>
+        </service>
+
     </application>
 
 </manifest>
