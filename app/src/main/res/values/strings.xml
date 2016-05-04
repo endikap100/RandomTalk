@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">RandomTalk</string>
     <string name="senderid">349004489598</string>
+    <string name="title_activity_buscar">BuscarActivity</string>
 </resources>

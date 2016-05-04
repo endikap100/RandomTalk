@@ -3,16 +3,17 @@
     package="das.randomtalk">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE"/>
-    <uses-permission android:name="android.permission.VIBRATE"/>
-    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
-    <uses-permission android:name="das.randomtalk.permission.C2D_MESSAGE"/>
-    <uses-permission android:name="com.example.gcm.permission.C2D_MESSAGE"
-        android:protectionLevel="signature"/>
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="das.randomtalk.permission.C2D_MESSAGE" />
+    <uses-permission
+        android:name="com.example.gcm.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
 
     <application
         android:allowBackup="true"
@@ -32,39 +33,44 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:theme="@style/AppTheme">
-        </activity>
-        <activity android:name=".Signup"></activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".Signup" />
 
-        <!--RECEIVER-->
+        <!-- RECEIVER -->
         <receiver
             android:name="com.google.android.gms.gcm.GcmReceiver"
             android:exported="true"
-            android:permission="com.google.android.c2dm.permission.SEND" >
+            android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+
                 <category android:name="com.example.gcm" />
             </intent-filter>
         </receiver>
 
-        <!--LISTENER-->
+        <!-- LISTENER -->
         <service
-            android:name="das.randomtalk.MiGcmListenerService"
-            android:exported="false" >
+            android:name=".MiGcmListenerService"
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
             </intent-filter>
         </service>
 
-        <!--INSTANCE ID LISTENER-->
+        <!-- INSTANCE ID LISTENER -->
         <service
-            android:name="das.randomtalk.MiInstanceIdListenerService"
+            android:name=".MiInstanceIdListenerService"
             android:exported="false">
             <intent-filter>
-                <action android:name="com.google.android.gms.iid.InstanceID"/>
+                <action android:name="com.google.android.gms.iid.InstanceID" />
             </intent-filter>
         </service>
 
+        <activity
+            android:name=".BuscarActivity"
+            android:label="@string/title_activity_buscar"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ChatActivity"></activity>
     </application>
 
 </manifest>
