@@ -52,7 +52,7 @@ public class MainLogin extends /*AppCompat*/Activity implements DoHTTPRequest.As
         return true;
     }
 
-    private String getRegistrationId(Context context) {
+    public String getRegistrationId(Context context) {
         //return null;
         SharedPreferences settings = getSharedPreferences("lugaresFavoritos", 0);
         String registrationId = settings.getString("registrationId", "");
@@ -125,7 +125,7 @@ public class MainLogin extends /*AppCompat*/Activity implements DoHTTPRequest.As
     public void processFinish(String output, String mReqId) {
         if(output.equals("1")) {
             Toast.makeText(this, "Loged Successfully", Toast.LENGTH_LONG).show();
-            Intent i = new Intent(this,MainActivity.class);
+            Intent i = new Intent(this,BuscarActivity.class);
             startActivity(i);
         }
         else{

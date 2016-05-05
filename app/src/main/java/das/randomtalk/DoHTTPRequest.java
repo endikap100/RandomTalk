@@ -91,7 +91,7 @@ public class DoHTTPRequest extends AsyncTask<String, Void, String> {
         switch(mReqId) {
             case "codigo_02": st = "http://galan.ehu.eus/jnieto011/WEB/login12.php"; break;
             case "codigo_01": st = "http://galan.ehu.eus/jnieto011/WEB/save12.php"; break;
-            case "sendregid": st = "http://galan.ehu.eus/jnieto011/WEB/save_rid.php"; break;
+            case "sendrgid": st = "http://galan.ehu.eus/jnieto011/WEB/Dispositivos_RandomTalk.php"; break;
             default: break;
         }
 
