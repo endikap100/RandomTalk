@@ -8,6 +8,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Toast;
 
 public class BuscarActivity extends AppCompatActivity implements DoHTTPRequest.AsyncResponse {
 
@@ -20,11 +21,17 @@ public class BuscarActivity extends AppCompatActivity implements DoHTTPRequest.A
     public void buscar(View view){
         String[] s = {"sadniasdhuasidhduiashdiuashduiashdiashdiuashdiuas"};//getRegistrationId(this)};
         DoHTTPRequest request = new DoHTTPRequest(BuscarActivity.this , this, "sendrgid", -1,s);
+        request.execute();
     }
 
     @Override
     public void processFinish(String output, String mReqId) {
-
+        if (output.equals("OK")){
+            Toast.makeText(this,"Estas en la lista de espera... \n\nEn breve se te unira a una sesión",Toast.LENGTH_LONG).show();
+            String[] s = {""};
+            DoHTTPRequest request = new DoHTTPRequest(BuscarActivity.this , this, "emparejar", -1,s);
+            request.execute();
+        }
     }
 
     public String getRegistrationId(Context context) {
