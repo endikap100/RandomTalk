@@ -19,16 +19,16 @@ public class BuscarActivity extends AppCompatActivity implements DoHTTPRequest.A
     }
 
     public void buscar(View view){
-        String[] s = {"sadniasdhuasidhduiashdiuashduiashdiashdiuashdiuas"};//getRegistrationId(this)};
+        String[] s = {getRegistrationId(this)};
         DoHTTPRequest request = new DoHTTPRequest(BuscarActivity.this , this, "sendrgid", -1,s);
         request.execute();
     }
 
     @Override
     public void processFinish(String output, String mReqId) {
-        if (output.equals("OK")){
+        if (output.equals("OK") && mReqId.equals("sendrgid")){
             Toast.makeText(this,"Estas en la lista de espera... \n\nEn breve se te unira a una sesión",Toast.LENGTH_LONG).show();
-            String[] s = {""};
+            String[] s = {getRegistrationId(this)};
             DoHTTPRequest request = new DoHTTPRequest(BuscarActivity.this , this, "emparejar", -1,s);
             request.execute();
         }
