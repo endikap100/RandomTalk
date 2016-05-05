@@ -14,16 +14,16 @@
 			// 03. Perform queries:
 			$user = $_POST['user'];
 			$password = $_POST['password'];
-			$id = $_POST['rId'];
+			//$id = $_POST['rId'];
 			$loged = FALSE;
 			$emaitza = mysqli_query($con, "SELECT * FROM `usuarios` WHERE nick = '".$user."' AND pass = '".$password."'");
 
 			while ($row = mysqli_fetch_array($emaitza)){
 				$loged = TRUE;
 			}
-			if ($mysqli->query("INSERT INTO 'usuarios' (reg_id) values ('".$id."') ON DUPLICATE KEY UPDATE reg_id = values('".$id."')") === TRUE){
+			/*if ($mysqli->query("INSERT INTO 'usuarios' (reg_id) values ('".$id."') ON DUPLICATE KEY UPDATE reg_id = values('".$id."')") === TRUE){
             	$loged = FALSE;
-            }
+            }*/
 			// 04. Close connection:
 			mysqli_close($con);
 			echo $loged;

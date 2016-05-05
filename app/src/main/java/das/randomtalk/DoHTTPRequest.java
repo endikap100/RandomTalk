@@ -58,7 +58,6 @@ public class DoHTTPRequest extends AsyncTask<String, Void, String> {
                 try {
                     param = "user=" + URLEncoder.encode(datuak[0], "UTF-8");
                     param += "&password=" + URLEncoder.encode(datuak[1], "UTF-8");
-                    param += "&rId=" + URLEncoder.encode(datuak[2], "UTF-8");
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }

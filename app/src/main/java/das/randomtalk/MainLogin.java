@@ -111,8 +111,7 @@ public class MainLogin extends /*AppCompat*/Activity implements DoHTTPRequest.As
         String nombre = ((EditText) findViewById(R.id.name)).getText().toString();
         String password = ((EditText) findViewById(R.id.password)).getText().toString();
         //String token = ObtenerRegistrationTokenEnGcm(this);
-        String token = getRegistrationId(this);
-        String [] datuak = {nombre,password,token};
+        String [] datuak = {nombre,password};
         DoHTTPRequest httpRequest = new DoHTTPRequest(MainLogin.this, this, "codigo_02", -1, datuak);
         httpRequest.execute();
 
