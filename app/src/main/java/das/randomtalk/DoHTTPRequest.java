@@ -170,7 +170,7 @@ public class DoHTTPRequest extends AsyncTask<String, Void, String> {
 
         // Amaiera eman:
         switch(mReqId){
-            case "codigo_01":case "codigo_02":case "sendrgid":case "emparejar":case "sendtext":
+            case "codigo_01":case "codigo_02":case "sendrgid":case "emparejar":
                 delegate.processFinish(result, mReqId);
                 break;
             default:
