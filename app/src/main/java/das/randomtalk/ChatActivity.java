@@ -27,7 +27,6 @@ import java.util.Locale;
 
 public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.AsyncResponse, LocationListener {
     private LocationListener mlocationListener;
-    private static final int PERMISSION_LOCATION_REQUEST_CODE = 1;
     private Location location;
     Geocoder geocoder;
     List<Address> addresses;
@@ -40,7 +39,6 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
-        if(checkPermission(this)){
         geocoder = new Geocoder(this, Locale.getDefault());
         texto = (TextView) findViewById(R.id.chattext);
         texto.setText("");
@@ -68,16 +66,10 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
             DoHTTPRequest request = new DoHTTPRequest(ChatActivity.this , this, "sendtext", -1,s);
             request.execute();
         }
-    acabado = true;}
-        else{
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION},PERMISSION_LOCATION_REQUEST_CODE);
-        }
+    acabado = true;
+
     }
 
-    public static boolean checkPermission(final Context context) {
-        return ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED;
-    }
 
     public void send(View view){
         EditText text = (EditText) findViewById(R.id.sendtext);

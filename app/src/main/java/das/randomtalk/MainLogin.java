@@ -1,11 +1,14 @@
 package das.randomtalk;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -24,7 +27,7 @@ public class MainLogin extends /*AppCompat*/Activity implements DoHTTPRequest.As
     private final static String TAG = "MainActivity";
     Context context;
     public static String user;
-
+    private static final int PERMISSION_LOCATION_REQUEST_CODE = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +39,9 @@ public class MainLogin extends /*AppCompat*/Activity implements DoHTTPRequest.As
             if (regid.isEmpty()) {
                 registerInBackground();
             }
+        }
+        if(!checkPermission(this)){
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION},PERMISSION_LOCATION_REQUEST_CODE);
         }
     }
 
@@ -135,16 +141,9 @@ public class MainLogin extends /*AppCompat*/Activity implements DoHTTPRequest.As
         }
     }
 
-    /*public static String ObtenerRegistrationTokenEnGcm(Context context)
-    {
-        InstanceID instanceID = InstanceID.getInstance(context);
-        String token = null;
-        try {
-            token = instanceID.getToken(context.getString(R.string.senderid), GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public static boolean checkPermission(final Context context) {
+        return ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED;
+    }
 
-        return token;
-    }*/
 }
