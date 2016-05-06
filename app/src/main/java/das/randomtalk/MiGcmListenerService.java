@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Message;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import com.google.android.gms.gcm.GcmListenerService;
@@ -35,16 +36,14 @@ public class MiGcmListenerService extends GcmListenerService {
         Log.d(TAG, "From: " + from);
         Log.d(TAG, "Message: " + message);
 
-        /**
-         * El  mensaje recibido se proceso en este metodo.
-         * Ejemplo: - Sincronizar con servidor.
-         *     - Almacenar mensajes en base de datos local.
-         *     - Actualizar UI.
-         *     - Mostrar nofificaciones
-         */
-
-        //En este caso mostraremos una notificacion
-        this.MostrarNotification(message,subtitle,title);
+        if(message.contains("/user")){
+            Message msg = new Message();
+            msg.obj = message.substring(5, message.length());
+            msg.sendToTarget();
+        }else {
+            //En este caso mostraremos una notificacion
+            this.MostrarNotification(message, subtitle, title);
+        }
     }
 
 

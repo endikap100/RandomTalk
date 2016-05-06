@@ -9,11 +9,15 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.model.LatLng;
 
@@ -26,12 +30,23 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
     private Location location;
     Geocoder geocoder;
     List<Address> addresses;
+    Handler handler;
+    TextView texto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
         geocoder = new Geocoder(this, Locale.getDefault());
+        texto = (TextView) findViewById(R.id.chattext);
+        texto.setText("");
+        handler = new Handler(Looper.getMainLooper()){
+            @Override
+            public void handleMessage(Message inputMessage) {
+                texto.setText("\n" + inputMessage.obj.toString());
+            }
+
+        };
 
 
         if(MainLogin.user != null){
