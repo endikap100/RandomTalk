@@ -2,10 +2,14 @@ package das.randomtalk;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -39,9 +43,6 @@ public class MainLogin extends /*AppCompat*/Activity implements DoHTTPRequest.As
             if (regid.isEmpty()) {
                 registerInBackground();
             }
-        }
-        if(!checkPermission(this)){
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION},PERMISSION_LOCATION_REQUEST_CODE);
         }
     }
 
@@ -115,13 +116,13 @@ public class MainLogin extends /*AppCompat*/Activity implements DoHTTPRequest.As
     public void login(View v){
         boolean loged = false;
 
-        String nombre = ((EditText) findViewById(R.id.name)).getText().toString();
-        String password = ((EditText) findViewById(R.id.password)).getText().toString();
-        //String token = ObtenerRegistrationTokenEnGcm(this);
-        String [] datuak = {nombre,password};
-        DoHTTPRequest httpRequest = new DoHTTPRequest(MainLogin.this, this, "codigo_02", -1, datuak);
-        httpRequest.execute();
 
+            String nombre = ((EditText) findViewById(R.id.name)).getText().toString();
+            String password = ((EditText) findViewById(R.id.password)).getText().toString();
+            //String token = ObtenerRegistrationTokenEnGcm(this);
+            String[] datuak = {nombre, password};
+            DoHTTPRequest httpRequest = new DoHTTPRequest(MainLogin.this, this, "codigo_02", -1, datuak);
+            httpRequest.execute();
     }
     public void signup(View v){
         Intent i = new Intent(this,Signup.class);
@@ -139,11 +140,6 @@ public class MainLogin extends /*AppCompat*/Activity implements DoHTTPRequest.As
         else{
             Toast.makeText(this, "Failed Login", Toast.LENGTH_LONG).show();
         }
-    }
-
-    public static boolean checkPermission(final Context context) {
-        return ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED;
     }
 
 }
