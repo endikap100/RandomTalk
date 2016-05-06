@@ -31,7 +31,6 @@ public class MainLogin extends /*AppCompat*/Activity implements DoHTTPRequest.As
     private final static String TAG = "MainActivity";
     Context context;
     public static String user;
-    private static final int PERMISSION_LOCATION_REQUEST_CODE = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,23 +105,17 @@ public class MainLogin extends /*AppCompat*/Activity implements DoHTTPRequest.As
                 return msg;
             }
 
-            /*@Override
-            protected  void onPostExecute(String msg){
-                mDisplay.append(msg+"\n");
-            }*/
         }.execute(null, null, null);
     }
 
     public void login(View v){
         boolean loged = false;
-
-
-            String nombre = ((EditText) findViewById(R.id.name)).getText().toString();
-            String password = ((EditText) findViewById(R.id.password)).getText().toString();
-            //String token = ObtenerRegistrationTokenEnGcm(this);
-            String[] datuak = {nombre, password};
-            DoHTTPRequest httpRequest = new DoHTTPRequest(MainLogin.this, this, "codigo_02", -1, datuak);
-            httpRequest.execute();
+        String nombre = ((EditText) findViewById(R.id.name)).getText().toString();
+        String password = ((EditText) findViewById(R.id.password)).getText().toString();
+        //String token = ObtenerRegistrationTokenEnGcm(this);
+        String[] datuak = {nombre, password};
+        DoHTTPRequest httpRequest = new DoHTTPRequest(MainLogin.this, this, "codigo_02", -1, datuak);
+        httpRequest.execute();
     }
     public void signup(View v){
         Intent i = new Intent(this,Signup.class);

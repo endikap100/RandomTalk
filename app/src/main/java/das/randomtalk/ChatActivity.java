@@ -26,10 +26,8 @@ import java.util.List;
 import java.util.Locale;
 
 public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.AsyncResponse, LocationListener {
-    private LocationListener mlocationListener;
-    private Location location;
+    Location location;
     Geocoder geocoder;
-    List<Address> addresses;
     static Handler handler;
     TextView texto;
     String User_contrario;
@@ -41,7 +39,9 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
         setContentView(R.layout.activity_chat);
         geocoder = new Geocoder(this, Locale.getDefault());
         texto = (TextView) findViewById(R.id.chattext);
-        texto.setText("");
+        if (texto != null) {
+            texto.setText("");
+        }
         handler = new Handler(Looper.getMainLooper()){
             @Override
             public void handleMessage(Message inputMessage) {
