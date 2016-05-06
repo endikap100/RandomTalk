@@ -4,6 +4,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.os.Message;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import com.google.android.gms.gcm.GcmListenerService;
+import com.google.android.gms.maps.model.LatLng;
 
 /**
  * Created by Jorge on 27/4/16.
@@ -53,6 +55,10 @@ public class MiGcmListenerService extends GcmListenerService {
             msg.obj = m;
             msg.setTarget(ChatActivity.handler);
             msg.sendToTarget();
+        }else if(message.contains("/Nombre")){
+            String[] s = {getRegistrationId(getApplicationContext()), "/User" + MainLogin.user + ":"};
+            DoHTTPRequest request = new DoHTTPRequest(null, this, "sendtext", -1, s);
+            request.execute();
         }else if(message.contains("/Text") && !message.contains("/User")){
             while(!ChatActivity.acabado){
                 try{
@@ -93,6 +99,14 @@ public class MiGcmListenerService extends GcmListenerService {
 
         int idNotificacion = 1;
         notificationManager.notify(1, notificationBuilder.build());
+    }
+
+    public String getRegistrationId(Context context) {
+        //return null;
+        SharedPreferences settings = getSharedPreferences("lugaresFavoritos", 0);
+        String registrationId = settings.getString("registrationId", "");
+
+        return registrationId;
     }
 
 }
