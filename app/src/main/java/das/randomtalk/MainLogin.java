@@ -23,6 +23,7 @@ public class MainLogin extends /*AppCompat*/Activity implements DoHTTPRequest.As
     private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
     private final static String TAG = "MainActivity";
     Context context;
+    public static String user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,6 +126,7 @@ public class MainLogin extends /*AppCompat*/Activity implements DoHTTPRequest.As
     public void processFinish(String output, String mReqId) {
         if(output.equals("1")) {
             Toast.makeText(this, "Loged Successfully", Toast.LENGTH_LONG).show();
+            user = ((EditText) findViewById(R.id.name)).getText().toString();
             Intent i = new Intent(this,BuscarActivity.class);
             startActivity(i);
         }
