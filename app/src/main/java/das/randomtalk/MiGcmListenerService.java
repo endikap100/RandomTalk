@@ -38,7 +38,7 @@ public class MiGcmListenerService extends GcmListenerService {
         while(!ChatActivity.acabado){};
         if(message.contains("/User")) {
             Message msg = new Message();
-            message.substring(5, message.length());
+            message = message.substring(5, message.length());
             String[] d = message.split(":");
             String[] m = {"user", d[0], d[1]};
             msg.obj = m;
