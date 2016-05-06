@@ -30,8 +30,10 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
     private Location location;
     Geocoder geocoder;
     List<Address> addresses;
-    Handler handler;
+    static Handler handler;
     TextView texto;
+    String User_contrario;
+    String User_contrario_Pais;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +45,17 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
         handler = new Handler(Looper.getMainLooper()){
             @Override
             public void handleMessage(Message inputMessage) {
-                texto.setText("\n" + inputMessage.obj.toString());
+                try {
+                    if (((String[]) inputMessage.obj)[0].equals("user")){
+                        User_contrario = ((String[]) inputMessage.obj)[1];
+                        User_contrario_Pais = ((String[]) inputMessage.obj)[2];
+                        texto.setText("\n" + User_contrario+" conectado desde "+User_contrario_Pais);
+                    }else if (((String[]) inputMessage.obj)[0].equals("text")){
+                        texto.setText(texto.getText() + "\n" + User_contrario+": " + ((String[]) inputMessage.obj)[1].toString());
+                    }
+                }catch (Exception e) {
+                    texto.setText(texto.getText() + "\n" + inputMessage.obj.toString());
+                }
             }
 
         };
@@ -58,7 +70,7 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
     }
     public void send(View view){
         EditText text = (EditText) findViewById(R.id.sendtext);
-        String[] s = {getRegistrationId(this),text.getText().toString()};
+        String[] s = {getRegistrationId(this),"/Text"+text.getText().toString()};
         DoHTTPRequest request = new DoHTTPRequest(ChatActivity.this , this, "sendtext", -1,s);
         request.execute();
         text.setText("");
@@ -109,7 +121,7 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
             if (addresses.size() > 0) {
                 /*for (int i = 0; i < addresses.get(0).getMaxAddressLineIndex(); i++)
                     filterAddressOrigin += addresses.get(0).getAddressLine(i) + " | ";*/
-                filterAddressOrigin = addresses.get(0).getCountryName()+" , "+ addresses.get(0).getSubLocality();
+                filterAddressOrigin = addresses.get(0).getCountryName();
             }
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -139,4 +151,5 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
     public void onProviderDisabled(String provider) {
 
     }
+
 }

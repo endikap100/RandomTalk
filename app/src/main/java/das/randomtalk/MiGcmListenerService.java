@@ -36,9 +36,20 @@ public class MiGcmListenerService extends GcmListenerService {
         Log.d(TAG, "From: " + from);
         Log.d(TAG, "Message: " + message);
 
-        if(message.contains("/user")){
+        if(message.contains("/User")) {
             Message msg = new Message();
-            msg.obj = message.substring(5, message.length());
+            message.substring(5, message.length());
+            String[] d = message.split(":");
+            String[] m = {"user", d[0], d[1]};
+            msg.obj = m;
+            msg.setTarget(ChatActivity.handler);
+            msg.sendToTarget();
+        }else if(message.contains("/Text")){
+            Message msg = new Message();
+            message.substring(5, message.length());
+            String[] m = {"text", message};
+            msg.obj = m;
+            msg.setTarget(ChatActivity.handler);
             msg.sendToTarget();
         }else {
             //En este caso mostraremos una notificacion
