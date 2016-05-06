@@ -46,6 +46,9 @@ public class MiGcmListenerService extends GcmListenerService {
             Message msg = new Message();
             message = message.substring(5, message.length());
             String[] d = message.split(":");
+            if (d.length < 2){
+                d = new String[] {d[0],"Localización desconocida"};
+            }
             String[] m = {"user", d[0], d[1]};
             msg.obj = m;
             msg.setTarget(ChatActivity.handler);

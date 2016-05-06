@@ -59,17 +59,18 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
             }
 
         };
+    }
 
-
+    @Override
+    protected void onStart() {
+        super.onStart();
         if(MainLogin.user != null){
             String[] s = {getRegistrationId(this),"/User" + MainLogin.user + ":" + getAddress(new LatLng(this.getLocation().getLatitude(),this.getLocation().getLongitude()))};
             DoHTTPRequest request = new DoHTTPRequest(ChatActivity.this , this, "sendtext", -1,s);
             request.execute();
         }
-    acabado = true;
-
+        acabado = true;
     }
-
 
     public void send(View view){
         EditText text = (EditText) findViewById(R.id.sendtext);
