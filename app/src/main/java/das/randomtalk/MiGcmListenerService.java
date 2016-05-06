@@ -48,7 +48,7 @@ public class MiGcmListenerService extends GcmListenerService {
         }else if(message.contains("/Text") && !message.contains("/User")){
             while(!ChatActivity.acabado){};
             Message msg = new Message();
-            message.substring(5, message.length());
+            message = message.substring(5, message.length());
             String[] m = {"text", message};
             msg.obj = m;
             msg.setTarget(ChatActivity.handler);

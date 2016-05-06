@@ -70,6 +70,8 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
     }
     public void send(View view){
         EditText text = (EditText) findViewById(R.id.sendtext);
+        TextView texto = (TextView) findViewById(R.id.chattext);
+        texto.setText(texto.getText()+ "\n" + MainLogin.user+": "+text.getText());
         String[] s = {getRegistrationId(this),"/Text"+text.getText().toString()};
         DoHTTPRequest request = new DoHTTPRequest(ChatActivity.this , this, "sendtext", -1,s);
         request.execute();
@@ -152,4 +154,8 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
 
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
 }
