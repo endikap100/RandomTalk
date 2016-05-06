@@ -66,9 +66,13 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
         super.onStart();
         if(MainLogin.user != null){
             do{
-                String[] s = {getRegistrationId(this), "/Nombre" };
-                DoHTTPRequest request = new DoHTTPRequest(ChatActivity.this, this, "sendtext", -1, s);
-                request.execute();
+                try {
+                    String[] s = {getRegistrationId(this), "/Nombre"};
+                    DoHTTPRequest request = new DoHTTPRequest(ChatActivity.this, this, "sendtext", -1, s);
+                    request.execute();
+                    Thread.sleep(1000);
+                }catch(Exception e){
+                }
             }while(User_contrario==null);
         }
         acabado = true;
