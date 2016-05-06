@@ -35,7 +35,7 @@ public class MiGcmListenerService extends GcmListenerService {
 
         Log.d(TAG, "From: " + from);
         Log.d(TAG, "Message: " + message);
-
+        while(!ChatActivity.acabado){};
         if(message.contains("/User")) {
             Message msg = new Message();
             message.substring(5, message.length());
@@ -44,7 +44,7 @@ public class MiGcmListenerService extends GcmListenerService {
             msg.obj = m;
             msg.setTarget(ChatActivity.handler);
             msg.sendToTarget();
-        }else if(message.contains("/Text")){
+        }else if(message.contains("/Text") && !message.contains("/User")){
             Message msg = new Message();
             message.substring(5, message.length());
             String[] m = {"text", message};

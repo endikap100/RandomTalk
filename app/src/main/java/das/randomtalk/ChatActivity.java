@@ -34,7 +34,7 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
     TextView texto;
     String User_contrario;
     String User_contrario_Pais;
-
+    static boolean acabado = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,7 +66,7 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
             DoHTTPRequest request = new DoHTTPRequest(ChatActivity.this , this, "sendtext", -1,s);
             request.execute();
         }
-
+    acabado = true;
     }
     public void send(View view){
         EditText text = (EditText) findViewById(R.id.sendtext);
