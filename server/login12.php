@@ -14,12 +14,19 @@
 			// 03. Perform queries:
 			$user = $_POST['user'];
 			$password = $_POST['password'];
+			$location = utf8_decode($_POST['location']);
+			$rid = $_POST['rid'];
 			//$id = $_POST['rId'];
 			$loged = FALSE;
 			$emaitza = mysqli_query($con, "SELECT * FROM `usuarios` WHERE nick = '".$user."' AND pass = '".$password."'");
 
 			while ($row = mysqli_fetch_array($emaitza)){
 				$loged = TRUE;
+			}
+
+
+			if($loged){
+				mysqli_query($con, "UPDATE `usuarios` SET location='".$location . "', reg_id= '".$rid."'WHERE nick = '".$user."' AND pass = '".$password."'");
 			}
 			/*if ($mysqli->query("INSERT INTO 'usuarios' (reg_id) values ('".$id."') ON DUPLICATE KEY UPDATE reg_id = values('".$id."')") === TRUE){
             	$loged = FALSE;

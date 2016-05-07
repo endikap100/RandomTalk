@@ -38,28 +38,7 @@ public class MiGcmListenerService extends GcmListenerService {
         Log.d(TAG, "From: " + from);
         Log.d(TAG, "Message: " + message);
 
-        if(message.contains("/User")) {
-            while(!ChatActivity.acabado){
-                try{
-                    Thread.sleep(100);
-                }catch (Exception e){
-                }
-            };
-            Message msg = new Message();
-            message = message.substring(5, message.length());
-            String[] d = message.split(":");
-            if (d.length < 2){
-                d = new String[] {d[0],"Localización desconocida"};
-            }
-            String[] m = {"user", d[0], d[1]};
-            msg.obj = m;
-            msg.setTarget(ChatActivity.handler);
-            msg.sendToTarget();
-        }else if(message.contains("/Nombre")){
-            String[] s = {getRegistrationId(getApplicationContext()), "/User" + MainLogin.user + ":"};
-            DoHTTPRequest request = new DoHTTPRequest(null, this, "sendtext", -1, s);
-            request.execute();
-        }else if(message.contains("/Text") && !message.contains("/User")){
+        if(message.contains("/Text")){
             while(!ChatActivity.acabado){
                 try{
                     Thread.sleep(100);

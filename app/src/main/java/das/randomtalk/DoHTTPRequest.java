@@ -58,6 +58,8 @@ public class DoHTTPRequest extends AsyncTask<String, Void, String> {
                 try {
                     param = "user=" + URLEncoder.encode(datuak[0], "UTF-8");
                     param += "&password=" + URLEncoder.encode(datuak[1], "UTF-8");
+                    param += "&location=" + URLEncoder.encode(datuak[2], "UTF-8");
+                    param += "&rid=" + URLEncoder.encode(datuak[3], "UTF-8");
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }
@@ -77,6 +79,15 @@ public class DoHTTPRequest extends AsyncTask<String, Void, String> {
                     e.printStackTrace();
                 }
                 break;
+
+            case "UserInfo":
+                try {
+                    param = "rid=" + URLEncoder.encode(datuak[0], "UTF-8");
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+                break;
+
 
             default:
                 param = "";
@@ -104,6 +115,7 @@ public class DoHTTPRequest extends AsyncTask<String, Void, String> {
             case "sendrgid": st = "http://galan.ehu.eus/jnieto011/WEB/Dispositivos_RandomTalk.php"; break;
             case "emparejar": st = "http://galan.ehu.eus/jnieto011/WEB/emparejar.php"; break;
             case "sendtext": st = "http://galan.ehu.eus/jnieto011/WEB/postMessage.php"; break;
+            case "UserInfo": st = "http://galan.ehu.eus/jnieto011/WEB/DatosUsuario.php"; break;
             default: break;
         }
 
@@ -170,7 +182,7 @@ public class DoHTTPRequest extends AsyncTask<String, Void, String> {
 
         // Amaiera eman:
         switch(mReqId){
-            case "codigo_01":case "codigo_02":case "sendrgid":case "emparejar":
+            case "codigo_01":case "codigo_02":case "sendrgid":case "emparejar":case "UserInfo":
                 delegate.processFinish(result, mReqId);
                 break;
             default:

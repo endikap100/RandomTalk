@@ -1,0 +1,35 @@
+{
+  "project_info": {
+    "project_number": "349004489598",
+    "project_id": "randomtalk-2d3b1"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:349004489598:android:65653d757a2a750c",
+        "android_client_info": {
+          "package_name": "das.randomtalk"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDyAupzsnijXTl5ApSCgJGp8RAqM5zNQdI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
