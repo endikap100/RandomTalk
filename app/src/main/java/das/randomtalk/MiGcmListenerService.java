@@ -39,12 +39,12 @@ public class MiGcmListenerService extends GcmListenerService {
         Log.d(TAG, "Message: " + message);
 
         if(message.contains("/Text")){
-            while(!ChatActivity.acabado){
+            /*while(!ChatActivity.acabado){
                 try{
                     Thread.sleep(1000);
                 }catch (Exception e){
                 }
-            };
+            };*/
             Message msg = new Message();
             message = message.substring(5, message.length());
             String[] m = {"text", message};
