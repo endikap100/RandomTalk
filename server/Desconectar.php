@@ -29,7 +29,7 @@ if($usuario == ""){
     }
 }
 
-mysqli_query($con, "DELETE `conversacion` WHERE user1 = '".$rid."' OR user2 = '".$rid."'");
+mysqli_query($con, "DELETE FROM `conversacion` WHERE user1 = '".$rid."' OR user2 = '".$rid."'");
 
 mysqli_close($con);
 if($usuario != ""){

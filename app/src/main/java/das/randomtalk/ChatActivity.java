@@ -17,6 +17,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
@@ -44,6 +45,20 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
+
+        EditText text = (EditText) findViewById(R.id.sendtext);
+        text.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus){
+                    int height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50, getResources().getDisplayMetrics());
+                    texto.setHeight(height);
+                }else{
+                    int height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 300, getResources().getDisplayMetrics());
+                    texto.setHeight(height);
+                }
+            }
+        });
         /*mScrollView = (ScrollView) findViewById(R.id.SCROLLER_ID);
         mScrollView.post(new Runnable()
         {
@@ -173,9 +188,9 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
 
 
         // Checks whether a hardware keyboard is available
-        if (newConfig.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_NO) {
+        if (newConfig.keyboard == Configuration.KEYBOARDHIDDEN_NO) {
             Toast.makeText(this, "keyboard visible", Toast.LENGTH_SHORT).show();
-        } else if (newConfig.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_YES) {
+        } else if (newConfig.keyboard == Configuration.KEYBOARDHIDDEN_YES) {
             Toast.makeText(this, "keyboard hidden", Toast.LENGTH_SHORT).show();
         }
     }
