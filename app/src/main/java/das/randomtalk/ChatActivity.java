@@ -55,7 +55,7 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
             public void onFocusChange(View v, boolean hasFocus) {
                 if(hasFocus) {
                     ViewGroup.LayoutParams params = texto.getLayoutParams();
-                    params.height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100, getResources().getDisplayMetrics());
+                    params.height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 125, getResources().getDisplayMetrics());
                     texto.setLayoutParams(params);
                 }else{
                     ViewGroup.LayoutParams params = texto.getLayoutParams();
@@ -125,7 +125,7 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
         DoHTTPRequest request = new DoHTTPRequest(ChatActivity.this , this, "sendtext", -1,s);
         request.execute();
         text.setText("");
-        text.clearFocus();
+        texto.requestFocus();
         scrollToBotton();
     }
 

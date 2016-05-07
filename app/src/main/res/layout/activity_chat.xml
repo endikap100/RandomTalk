@@ -10,6 +10,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="das.randomtalk.ChatActivity"
     android:orientation="vertical"
+    android:background="@drawable/back"
     android:weightSum="1">
 
     <LinearLayout
@@ -31,7 +32,6 @@
             android:id="@+id/desconectar"
             android:onClick="desconectar"/>
     </LinearLayout>
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="300dp"
@@ -40,7 +40,9 @@
         android:layout_row="1"
         android:layout_column="0"
         android:scrollbars="vertical"
-        android:isScrollContainer="false"/>
+        android:isScrollContainer="false"
+        android:backgroundTint="#bcf3fb"
+        android:background="#c2e5ff" />
 
 
     <LinearLayout
@@ -60,7 +62,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/sendtext"
-            android:layout_weight="1.01" />
+            android:layout_weight="1.01"
+            android:background="#c2e5ff" />
 
         <Button
             style="?android:attr/buttonStyleSmall"
@@ -70,5 +73,12 @@
             android:id="@+id/send"
             android:onClick="send"/>
     </LinearLayout>
+
+    <SeekBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/seekBar"
+        android:layout_row="1"
+        android:layout_column="1" />
 
 </GridLayout>
