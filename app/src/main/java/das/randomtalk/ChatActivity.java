@@ -39,6 +39,7 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
     static boolean acabado = false;
     String textoprev;
     ScrollView mScrollView;
+    boolean desconectado = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -140,18 +141,31 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
     @Override
     protected void onStop() {
         super.onStop();
+        if(!desconectado) {
+            desconectar();
+        }
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        if(!desconectado) {
+            desconectar();
+        }
     }
 
     public void desconectar(View v){
+        if(!desconectado) {
+            desconectar();
+        }
+    }
+
+    public void desconectar(){
         String[] datuak = {getRegistrationId(this)};
         DoHTTPRequest httpRequest = new DoHTTPRequest(null, this, "desconectar", -1, datuak);
         httpRequest.execute();
         finish();
+        desconectado = true;
     }
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
