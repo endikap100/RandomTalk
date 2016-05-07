@@ -70,7 +70,9 @@
             android:name=".BuscarActivity"
             android:label="@string/title_activity_buscar"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ChatActivity"></activity>
+        <activity
+            android:name=".ChatActivity"
+            android:windowSoftInputMode="adjustPan"></activity>
     </application>
 
 </manifest>

@@ -16,8 +16,10 @@ import android.os.Message;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.model.LatLng;
@@ -34,10 +36,20 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
     String User_contrario_Pais;
     static boolean acabado = false;
     String textoprev;
+    ScrollView mScrollView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
+
+        /*mScrollView = (ScrollView) findViewById(R.id.SCROLLER_ID);
+        mScrollView.post(new Runnable()
+        {
+            public void run()
+            {
+                mScrollView.smoothScrollTo(0, texto.getBottom());
+            }
+        });*/
 
         if(savedInstanceState!=null) {
             textoprev = savedInstanceState.getString("text");
@@ -50,19 +62,20 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
                 DoHTTPRequest request = new DoHTTPRequest(ChatActivity.this, this, "UserInfo", -1, s);
                 request.execute();
             }
-            acabado = true;
         }
 
         texto = (TextView) findViewById(R.id.chattext);
         if (texto != null) {
             texto.setText(textoprev);
         }
+        texto.setMovementMethod(new ScrollingMovementMethod());
         handler = new Handler(Looper.getMainLooper()){
             @Override
             public void handleMessage(Message inputMessage) {
                 try {
                     if (((String[]) inputMessage.obj)[0].equals("text")){
                         texto.setText(texto.getText() + "\n" + User_contrario+": " + ((String[]) inputMessage.obj)[1].toString());
+                        crollToBotton();
                     }
                 }catch (Exception e) {
                     texto.setText(texto.getText() + "\n" + inputMessage.obj.toString());
@@ -72,10 +85,11 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
         };
     }
 
+
     @Override
     protected void onStart() {
         super.onStart();
-
+        acabado = true;
     }
 
     public void send(View view){
@@ -86,6 +100,16 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
         DoHTTPRequest request = new DoHTTPRequest(ChatActivity.this , this, "sendtext", -1,s);
         request.execute();
         text.setText("");
+
+        crollToBotton();
+    }
+
+    private void crollToBotton(){
+        int scrollAmount = texto.getLayout().getLineTop(texto.getLineCount()) - texto.getHeight();
+        if (scrollAmount > 0)
+            texto.scrollTo(0, scrollAmount);
+        else
+            texto.scrollTo(0, 0);
     }
 
     public String getRegistrationId(Context context) {
@@ -104,7 +128,7 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
         }else {
             User_contrario_Pais = output.split(":")[1];
         }
-        texto.setText("\n" + User_contrario+" conectado desde "+User_contrario_Pais);
+        texto.setText("\n" + User_contrario+" conectado desde "+User_contrario_Pais+"\n"+texto.getText().toString());
     }
 
 
