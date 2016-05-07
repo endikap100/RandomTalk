@@ -19,8 +19,10 @@ import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
 
@@ -41,7 +43,6 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
-
         /*mScrollView = (ScrollView) findViewById(R.id.SCROLLER_ID);
         mScrollView.post(new Runnable()
         {
@@ -91,6 +92,7 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
         super.onStart();
         acabado = true;
     }
+
 
     public void send(View view){
         EditText text = (EditText) findViewById(R.id.sendtext);
