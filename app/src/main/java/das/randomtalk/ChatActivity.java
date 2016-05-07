@@ -76,6 +76,8 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
                     if (((String[]) inputMessage.obj)[0].equals("text")){
                         texto.setText(texto.getText() + "\n" + User_contrario+": " + ((String[]) inputMessage.obj)[1].toString());
                         crollToBotton();
+                    }else if(((String[]) inputMessage.obj)[0].equals("desconectar")){
+                        finish();
                     }
                 }catch (Exception e) {
                     texto.setText(texto.getText() + "\n" + inputMessage.obj.toString());
@@ -144,7 +146,10 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
     }
 
     public void desconectar(View v){
-
+        String[] datuak = {getRegistrationId(this)};
+        DoHTTPRequest httpRequest = new DoHTTPRequest(null, this, "desconectar", -1, datuak);
+        httpRequest.execute();
+        finish();
     }
     /*@Override
     public void onConfigurationChanged(Configuration newConfig) {

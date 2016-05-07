@@ -80,7 +80,7 @@ public class DoHTTPRequest extends AsyncTask<String, Void, String> {
                 }
                 break;
 
-            case "UserInfo":
+            case "UserInfo":case "desconectar":
                 try {
                     param = "rid=" + URLEncoder.encode(datuak[0], "UTF-8");
                 } catch (UnsupportedEncodingException e) {
@@ -116,6 +116,7 @@ public class DoHTTPRequest extends AsyncTask<String, Void, String> {
             case "emparejar": st = "http://galan.ehu.eus/jnieto011/WEB/emparejar.php"; break;
             case "sendtext": st = "http://galan.ehu.eus/jnieto011/WEB/postMessage.php"; break;
             case "UserInfo": st = "http://galan.ehu.eus/jnieto011/WEB/DatosUsuario.php"; break;
+            case "desconectar": st = "http://galan.ehu.eus/jnieto011/WEB/Desconectar.php"; break;
             default: break;
         }
 
