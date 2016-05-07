@@ -153,17 +153,18 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
         httpRequest.execute();
         finish();
     }
-    /*@Override
+    @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
 
-        // Checks the orientation of the screen
-        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            textoprev = texto.getText().toString();
-        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
-            textoprev = texto.getText().toString();
+
+        // Checks whether a hardware keyboard is available
+        if (newConfig.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_NO) {
+            Toast.makeText(this, "keyboard visible", Toast.LENGTH_SHORT).show();
+        } else if (newConfig.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_YES) {
+            Toast.makeText(this, "keyboard hidden", Toast.LENGTH_SHORT).show();
         }
-    }*/
+    }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
