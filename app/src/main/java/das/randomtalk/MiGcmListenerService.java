@@ -41,7 +41,7 @@ public class MiGcmListenerService extends GcmListenerService {
         if(message.contains("/Text")){
             while(!ChatActivity.acabado){
                 try{
-                    Thread.sleep(100);
+                    Thread.sleep(1000);
                 }catch (Exception e){
                 }
             };
