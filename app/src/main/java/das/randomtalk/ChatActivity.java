@@ -59,14 +59,14 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
                 }
             }
         });
-        /*mScrollView = (ScrollView) findViewById(R.id.SCROLLER_ID);
-        mScrollView.post(new Runnable()
-        {
-            public void run()
+            /*mScrollView = (ScrollView) findViewById(R.id.SCROLLER_ID);
+            mScrollView.post(new Runnable()
             {
-                mScrollView.smoothScrollTo(0, texto.getBottom());
-            }
-        });*/
+                public void run()
+                {
+                    mScrollView.smoothScrollTo(0, texto.getBottom());
+                }
+            });*/
 
         if(savedInstanceState!=null) {
             textoprev = savedInstanceState.getString("text");
