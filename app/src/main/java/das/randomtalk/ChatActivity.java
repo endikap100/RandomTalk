@@ -76,7 +76,7 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
                 try {
                     if (((String[]) inputMessage.obj)[0].equals("text")){
                         texto.setText(texto.getText() + "\n" + User_contrario+": " + ((String[]) inputMessage.obj)[1].toString());
-                        crollToBotton();
+                        scrollToBotton();
                     }else if(((String[]) inputMessage.obj)[0].equals("desconectar")){
                         finish();
                     }
@@ -105,10 +105,10 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
         request.execute();
         text.setText("");
 
-        crollToBotton();
+        scrollToBotton();
     }
 
-    private void crollToBotton(){
+    private void scrollToBotton(){
         int scrollAmount = texto.getLayout().getLineTop(texto.getLineCount()) - texto.getHeight();
         if (scrollAmount > 0)
             texto.scrollTo(0, scrollAmount);
