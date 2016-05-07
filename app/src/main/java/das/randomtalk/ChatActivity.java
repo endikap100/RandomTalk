@@ -1,6 +1,7 @@
 package das.randomtalk;
 
 import android.Manifest;
+import android.app.ActionBar;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -14,11 +15,13 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
@@ -50,12 +53,14 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
         text.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if(hasFocus){
-                    int height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50, getResources().getDisplayMetrics());
-                    texto.setHeight(height);
+                if(hasFocus) {
+                    ViewGroup.LayoutParams params = texto.getLayoutParams();
+                    params.height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100, getResources().getDisplayMetrics());
+                    texto.setLayoutParams(params);
                 }else{
-                    int height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 300, getResources().getDisplayMetrics());
-                    texto.setHeight(height);
+                    ViewGroup.LayoutParams params = texto.getLayoutParams();
+                    params.height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 300, getResources().getDisplayMetrics());
+                    texto.setLayoutParams(params);
                 }
             }
         });
@@ -120,7 +125,7 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
         DoHTTPRequest request = new DoHTTPRequest(ChatActivity.this , this, "sendtext", -1,s);
         request.execute();
         text.setText("");
-
+        text.clearFocus();
         scrollToBotton();
     }
 
@@ -158,7 +163,9 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
         super.onStop();
         if(!desconectado) {
             desconectar();
+            Toast.makeText(getApplicationContext(), User_contrario+"se ha desconectado.",Toast.LENGTH_LONG);
         }
+
     }
 
     @Override
