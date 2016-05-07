@@ -50,7 +50,7 @@ public class MiGcmListenerService extends GcmListenerService {
             msg.obj = m;
             msg.setTarget(ChatActivity.handler);
             msg.sendToTarget();
-        }else if(message.contains("/desconectar")){
+        }else if(subtitle.contains("/desconectar")){
             while(!ChatActivity.acabado){
                 try{
                     Thread.sleep(1000);
