@@ -33,11 +33,26 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
     String User_contrario;
     String User_contrario_Pais;
     static boolean acabado = false;
-    String textoprev = "";
+    String textoprev;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
+
+        if(savedInstanceState!=null) {
+            textoprev = savedInstanceState.getString("text");
+            User_contrario = savedInstanceState.getString("User_contrario");
+            User_contrario_Pais = savedInstanceState.getString("User_contrario_Pais");
+        }else{
+            textoprev = "";
+            if(MainLogin.user != null){
+                String[] s = {getRegistrationId(this)};
+                DoHTTPRequest request = new DoHTTPRequest(ChatActivity.this, this, "UserInfo", -1, s);
+                request.execute();
+            }
+            acabado = true;
+        }
+
         texto = (TextView) findViewById(R.id.chattext);
         if (texto != null) {
             texto.setText(textoprev);
@@ -60,12 +75,7 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
     @Override
     protected void onStart() {
         super.onStart();
-        if(MainLogin.user != null){
-            String[] s = {getRegistrationId(this)};
-            DoHTTPRequest request = new DoHTTPRequest(ChatActivity.this, this, "UserInfo", -1, s);
-            request.execute();
-        }
-        acabado = true;
+
     }
 
     public void send(View view){
@@ -89,7 +99,11 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
     @Override
     public void processFinish(String output, String mReqId) {
         User_contrario = output.split(":")[0];
-        User_contrario_Pais = output.split(":")[1];
+        if (output.split(":").length == 1){
+            User_contrario_Pais = "Ubicación desconocida";
+        }else {
+            User_contrario_Pais = output.split(":")[1];
+        }
         texto.setText("\n" + User_contrario+" conectado desde "+User_contrario_Pais);
     }
 
@@ -108,7 +122,7 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
     public void desconectar(View v){
 
     }
-    @Override
+    /*@Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
 
@@ -118,5 +132,14 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
         } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
             textoprev = texto.getText().toString();
         }
+    }*/
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("text", texto.getText().toString());
+        outState.putString("User_contrario", User_contrario);
+        outState.putString("User_contrario_Pais", User_contrario_Pais);
+
     }
 }
