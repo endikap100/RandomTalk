@@ -42,6 +42,7 @@ import com.google.android.gms.maps.model.LatLng;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Locale;
 
@@ -165,10 +166,11 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
                     e.printStackTrace();
                 }
             }
-            String[] s = {getRegistrationId(this),"/Image"+this.BitMapToString(imageBitmap)};
-            DoHTTPRequest request = new DoHTTPRequest(ChatActivity.this , this, "sendtext", -1,s);
+            String[] s = {BitMapToString(imageBitmap)};
+            DoHTTPRequest request = new DoHTTPRequest(ChatActivity.this , this, "subirfoto", -1,s);
             request.execute();
-            //startActivity(new Intent(getApplicationContext(),Imagen.class).putExtra("image",BitMapToString(imageBitmap)));
+
+
         }
     }
 
@@ -211,13 +213,19 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
 
     @Override
     public void processFinish(String output, String mReqId) {
-        User_contrario = output.split(":")[0];
-        if (output.split(":").length == 1){
-            User_contrario_Pais = "Ubicación desconocida";
+        if(mReqId.equals("subirfoto")){
+            String[] s = {getRegistrationId(getApplicationContext()),"/Image"+output};
+            DoHTTPRequest request = new DoHTTPRequest(ChatActivity.this , this, "sendtext", -1,s);
+            request.execute();
         }else {
-            User_contrario_Pais = output.split(":")[1];
+            User_contrario = output.split(":")[0];
+            if (output.split(":").length == 1) {
+                User_contrario_Pais = "Ubicación desconocida";
+            } else {
+                User_contrario_Pais = output.split(":")[1];
+            }
+            texto.setText("\n" + User_contrario + " conectado desde " + User_contrario_Pais + "\n" + texto.getText().toString());
         }
-        texto.setText("\n" + User_contrario+" conectado desde "+User_contrario_Pais+"\n"+texto.getText().toString());
     }
 
 
@@ -277,7 +285,7 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
 
     public String BitMapToString(Bitmap bitmap){
         ByteArrayOutputStream baos=new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
         byte [] b=baos.toByteArray();
         String temp=Base64.encodeToString(b, Base64.DEFAULT);
         return temp;

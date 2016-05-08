@@ -87,6 +87,21 @@ public class DoHTTPRequest extends AsyncTask<String, Void, String> {
                     e.printStackTrace();
                 }
                 break;
+            case "subirfoto":
+                try {
+                    param = "foto=" + URLEncoder.encode(datuak[0], "UTF-8");
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+                break;
+            case "DescargarImagen":
+                try {
+                    param = "id=" + URLEncoder.encode(datuak[0], "UTF-8");
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+                break;
+
 
 
             default:
@@ -117,6 +132,8 @@ public class DoHTTPRequest extends AsyncTask<String, Void, String> {
             case "sendtext": st = "http://galan.ehu.eus/jnieto011/WEB/postMessage.php"; break;
             case "UserInfo": st = "http://galan.ehu.eus/jnieto011/WEB/DatosUsuario.php"; break;
             case "desconectar": st = "http://galan.ehu.eus/jnieto011/WEB/Desconectar.php"; break;
+            case "subirfoto": st = "http://galan.ehu.eus/jnieto011/WEB/SubirFoto.php"; break;
+            case "DescargarImagen": st = "http://galan.ehu.eus/jnieto011/WEB/BajarFoto.php"; break;
             default: break;
         }
 
@@ -183,7 +200,7 @@ public class DoHTTPRequest extends AsyncTask<String, Void, String> {
 
         // Amaiera eman:
         switch(mReqId){
-            case "codigo_01":case "codigo_02":case "sendrgid":case "emparejar":case "UserInfo":
+            case "codigo_01":case "codigo_02":case "sendrgid":case "emparejar":case "UserInfo":case "subirfoto":case "DescargarImagen":
                 delegate.processFinish(result, mReqId);
                 break;
             default:

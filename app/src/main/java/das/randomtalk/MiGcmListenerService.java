@@ -63,7 +63,7 @@ public class MiGcmListenerService extends GcmListenerService {
             msg.obj = m;
             msg.setTarget(ChatActivity.handler);
             msg.sendToTarget();
-        }else if(subtitle.contains("/Image")){
+        }else if(message.contains("/Image")){
             while(!ChatActivity.acabado){
                 try{
                     Thread.sleep(1000);
