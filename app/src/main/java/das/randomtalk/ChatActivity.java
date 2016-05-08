@@ -14,6 +14,7 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Debug;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
@@ -24,6 +25,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Base64;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -112,7 +114,7 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
                     }else if(((String[]) inputMessage.obj)[0].equals("desconectar")){
                         finish();
                     }else if(((String[]) inputMessage.obj)[0].equals("image")){
-                        startActivity(new Intent(getApplicationContext(), Imagen.class).putExtra("image",((String[]) inputMessage.obj)[1].toString()));
+                        startActivity(new Intent(getApplicationContext(), Imagen.class).putExtra("image", ((String[]) inputMessage.obj)[1].toString()).putExtra("text", texto.getText().toString()).putExtra("User_Contrario", User_contrario).putExtra("User_Contrario_Pais", User_contrario_Pais));
                         desconectado = true;
                     }
                 }catch (Exception e) {
@@ -143,8 +145,6 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
 
     private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
-                MediaStore.Images.Media.EXTERNAL_CONTENT_URI.getPath());
         desconectado = true;
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
             startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
@@ -168,6 +168,7 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
             String[] s = {getRegistrationId(this),"/Image"+this.BitMapToString(imageBitmap)};
             DoHTTPRequest request = new DoHTTPRequest(ChatActivity.this , this, "sendtext", -1,s);
             request.execute();
+            //startActivity(new Intent(getApplicationContext(),Imagen.class).putExtra("image",BitMapToString(imageBitmap)));
         }
     }
 
@@ -276,7 +277,7 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
 
     public String BitMapToString(Bitmap bitmap){
         ByteArrayOutputStream baos=new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte [] b=baos.toByteArray();
         String temp=Base64.encodeToString(b, Base64.DEFAULT);
         return temp;

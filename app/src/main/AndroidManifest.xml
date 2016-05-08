@@ -78,6 +78,7 @@
         <activity
             android:name=".ChatActivity"
             android:windowSoftInputMode="adjustResize"></activity>
+        <activity android:name=".Imagen"></activity>
     </application>
 
 </manifest>
