@@ -3,9 +3,12 @@ package das.randomtalk;
 import android.Manifest;
 import android.app.ActionBar;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -14,12 +17,17 @@ import android.location.LocationManager;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Base64;
 import android.util.TypedValue;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -30,6 +38,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
@@ -44,6 +53,8 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
     String textoprev;
     ScrollView mScrollView;
     boolean desconectado = false;
+    static final int REQUEST_IMAGE_CAPTURE = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,6 +111,9 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
                         scrollToBotton();
                     }else if(((String[]) inputMessage.obj)[0].equals("desconectar")){
                         finish();
+                    }else if(((String[]) inputMessage.obj)[0].equals("image")){
+                        startActivity(new Intent(getApplicationContext(), Imagen.class).putExtra("image",((String[]) inputMessage.obj)[1].toString()));
+                        desconectado = true;
                     }
                 }catch (Exception e) {
                     texto.setText(texto.getText() + "\n" + inputMessage.obj.toString());
@@ -108,6 +122,55 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
 
         };
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.chat_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.photo:
+                dispatchTakePictureIntent();
+                return true;
+
+        }
+        return false;
+    }
+
+    private void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI.getPath());
+        desconectado = true;
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = null;
+            if(data.getData()==null){
+                imageBitmap = (Bitmap)data.getExtras().get("data");
+            }else{
+                try {
+                    imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), data.getData());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            String[] s = {getRegistrationId(this),"/Image"+this.BitMapToString(imageBitmap)};
+            DoHTTPRequest request = new DoHTTPRequest(ChatActivity.this , this, "sendtext", -1,s);
+            request.execute();
+        }
+    }
+
 
 
     @Override
@@ -163,7 +226,7 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
         super.onStop();
         if(!desconectado) {
             desconectar();
-            Toast.makeText(getApplicationContext(), User_contrario+"se ha desconectado.",Toast.LENGTH_LONG);
+            Toast.makeText(getApplicationContext(), User_contrario + "se ha desconectado.", Toast.LENGTH_LONG);
         }
 
     }
@@ -209,5 +272,13 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
         outState.putString("User_contrario", User_contrario);
         outState.putString("User_contrario_Pais", User_contrario_Pais);
 
+    }
+
+    public String BitMapToString(Bitmap bitmap){
+        ByteArrayOutputStream baos=new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        byte [] b=baos.toByteArray();
+        String temp=Base64.encodeToString(b, Base64.DEFAULT);
+        return temp;
     }
 }
