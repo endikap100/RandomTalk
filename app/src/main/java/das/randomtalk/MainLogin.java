@@ -119,7 +119,7 @@ public class MainLogin extends /*AppCompat*/Activity implements DoHTTPRequest.As
 
     public void login(View v){
         boolean loged = false;
-        /*LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+        LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
         if( !locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("GPS Desactivado");  // GPS not found
@@ -132,7 +132,7 @@ public class MainLogin extends /*AppCompat*/Activity implements DoHTTPRequest.As
 
             builder.create().show();
             return;
-        }else {*/
+        }else {
             String nombre = ((EditText) findViewById(R.id.name)).getText().toString();
             String password = ((EditText) findViewById(R.id.password)).getText().toString();
             String location = this.getAddress(new LatLng(getLocation().getLatitude(), getLocation().getLongitude()));
@@ -140,7 +140,7 @@ public class MainLogin extends /*AppCompat*/Activity implements DoHTTPRequest.As
             String[] datuak = {nombre, password, location,rid};
             DoHTTPRequest httpRequest = new DoHTTPRequest(MainLogin.this, this, "codigo_02", -1, datuak);
             httpRequest.execute();
-        //}
+        }
     }
     public void signup(View v){
         Intent i = new Intent(this,Signup.class);
