@@ -135,7 +135,12 @@ public class MainLogin extends /*AppCompat*/Activity implements DoHTTPRequest.As
         }else {
             String nombre = ((EditText) findViewById(R.id.name)).getText().toString();
             String password = ((EditText) findViewById(R.id.password)).getText().toString();
-            String location = this.getAddress(new LatLng(getLocation().getLatitude(), getLocation().getLongitude()));
+            String location = "";
+            try {
+                 location = this.getAddress(new LatLng(getLocation().getLatitude(), getLocation().getLongitude()));
+            }catch (Exception e){
+                location = "Ubicación desconocida";
+            }
             String rid = getRegistrationId(getApplicationContext());
             String[] datuak = {nombre, password, location,rid};
             DoHTTPRequest httpRequest = new DoHTTPRequest(MainLogin.this, this, "codigo_02", -1, datuak);
