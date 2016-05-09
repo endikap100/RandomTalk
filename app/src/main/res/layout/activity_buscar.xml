@@ -9,7 +9,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="das.randomtalk.BuscarActivity"
     android:gravity="center_horizontal"
-    android:background="@drawable/back"
+    android:background="@drawable/back_aux"
     android:weightSum="1">
 
     <Button

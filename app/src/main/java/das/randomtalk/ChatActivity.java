@@ -64,6 +64,7 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
     private final int REQ_CODE_SPEECH_INPUT = 5;
     TextToSpeech tts;
     private final int TTS = 6;
+    Boolean isTTV = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,6 +124,7 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
                     if (((String[]) inputMessage.obj)[0].equals("text")){
                         texto.setText(texto.getText() + "\n" + User_contrario+": " + ((String[]) inputMessage.obj)[1].toString());
                         scrollToBotton();
+                        tts.speak(((String[]) inputMessage.obj)[1].toString(),TextToSpeech.QUEUE_FLUSH,null);
                     }else if(((String[]) inputMessage.obj)[0].equals("desconectar")){
                         finish();
                     }else if(((String[]) inputMessage.obj)[0].equals("image")){
@@ -154,7 +156,10 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
                 promptSpeechInput();
                 return true;
             case R.id.Read:
+                isTTV = !isTTV;
+                if (isTTV){
                     tts.speak("¡Gracias por activar la lectura de texto!", TextToSpeech.QUEUE_FLUSH, null);
+                }
                 return true;
 
 
@@ -212,27 +217,27 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
                     String query = result.get(0);
                     texto.setText(query.toString());
                 }
-            }else if(requestCode == TTS){
-                if (resultCode == TextToSpeech.Engine.CHECK_VOICE_DATA_PASS) {
-                    // success, create the TTS instance
-                    tts=new TextToSpeech(getApplicationContext(),new TextToSpeech.OnInitListener()
+        }else if(requestCode == TTS){
+            if (resultCode == TextToSpeech.Engine.CHECK_VOICE_DATA_PASS) {
+                // success, create the TTS instance
+                tts=new TextToSpeech(getApplicationContext(),new TextToSpeech.OnInitListener()
+                {
+                    @Override
+                    public void onInit(int status)
                     {
-                        @Override
-                        public void onInit(int status)
-                        {
-                            tts.setLanguage(Locale.getDefault());
-                            tts.setPitch(1.0f);
-                            tts.setSpeechRate(1f);
-                        }
-                    });
-                } else {
-                    // missing data, install it
-                    Intent installIntent = new Intent();
-                    installIntent.setAction(
-                            TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA);
-                    startActivity(installIntent);
-                }
+                        tts.setLanguage(Locale.getDefault());
+                        tts.setPitch(1.0f);
+                        tts.setSpeechRate(1f);
+                    }
+                });
+            } else {
+                // missing data, install it
+                Intent installIntent = new Intent();
+                installIntent.setAction(
+                        TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA);
+                startActivity(installIntent);
             }
+        }
         }
 
 

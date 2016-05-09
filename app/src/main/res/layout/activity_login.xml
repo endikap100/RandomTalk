@@ -9,7 +9,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainLogin"
     android:orientation="vertical"
-    android:background="@drawable/back"
+    android:background="@drawable/back_aux"
     android:weightSum="1">
 
     <TextView
