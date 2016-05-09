@@ -21,6 +21,7 @@ import android.os.Looper;
 import android.os.Message;
 import android.provider.MediaStore;
 import android.speech.RecognizerIntent;
+import android.speech.tts.TextToSpeech;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -61,11 +62,17 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
     boolean desconectado = false;
     static final int REQUEST_IMAGE_CAPTURE = 1;
     private final int REQ_CODE_SPEECH_INPUT = 5;
+    TextToSpeech tts;
+    private final int TTS = 6;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
+
+        Intent checkIntent = new Intent();
+        checkIntent.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
+        startActivityForResult(checkIntent, TTS);
 
         EditText text = (EditText) findViewById(R.id.sendtext);
         text.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -146,6 +153,10 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
             case R.id.Voice:
                 promptSpeechInput();
                 return true;
+            case R.id.Read:
+                    tts.speak("¡Gracias por activar la lectura de texto!", TextToSpeech.QUEUE_FLUSH, null);
+                return true;
+
 
 
     }

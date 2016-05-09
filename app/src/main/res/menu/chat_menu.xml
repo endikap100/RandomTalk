@@ -14,5 +14,12 @@
         android:title="Voice"
         app:showAsAction="ifRoom"/>
 
+    <item
+        android:id="@+id/Read"
+        android:icon="@drawable/read"
+        android:title="Read"
+        app:showAsAction="ifRoom"/>
+
+
 </menu>
 
