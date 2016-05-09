@@ -8,5 +8,11 @@
         android:title="Foto"
         app:showAsAction="ifRoom"/>
 
+    <item
+        android:id="@+id/Voice"
+        android:icon="@drawable/voice"
+        android:title="Voice"
+        app:showAsAction="ifRoom"/>
+
 </menu>
 

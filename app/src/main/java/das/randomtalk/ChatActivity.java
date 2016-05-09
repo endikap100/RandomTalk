@@ -2,6 +2,7 @@ package das.randomtalk;
 
 import android.Manifest;
 import android.app.ActionBar;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -19,6 +20,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.provider.MediaStore;
+import android.speech.RecognizerIntent;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -43,6 +45,7 @@ import com.google.android.gms.maps.model.LatLng;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -57,6 +60,7 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
     ScrollView mScrollView;
     boolean desconectado = false;
     static final int REQUEST_IMAGE_CAPTURE = 1;
+    private final int REQ_CODE_SPEECH_INPUT = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,9 +143,28 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
             case R.id.photo:
                 dispatchTakePictureIntent();
                 return true;
+            case R.id.Voice:
+                promptSpeechInput();
+                return true;
 
-        }
+
+    }
         return false;
+    }
+
+    private void promptSpeechInput() {
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "¡Dime!");
+        try {
+            startActivityForResult(intent, REQ_CODE_SPEECH_INPUT);
+        } catch (ActivityNotFoundException a) {
+            Toast.makeText(getApplicationContext(),
+                    "No soportado",
+                    Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void dispatchTakePictureIntent() {
@@ -169,10 +192,17 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
             String[] s = {BitMapToString(imageBitmap)};
             DoHTTPRequest request = new DoHTTPRequest(ChatActivity.this , this, "subirfoto", -1,s);
             request.execute();
+        }else if( REQ_CODE_SPEECH_INPUT == requestCode) {
+                if (resultCode == RESULT_OK && null != data) {
 
+                    ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                    EditText texto = (EditText) findViewById(R.id.sendtext);
 
+                    String query = result.get(0);
+                    texto.setText(query.toString());
+                }
+            }
         }
-    }
 
 
 
