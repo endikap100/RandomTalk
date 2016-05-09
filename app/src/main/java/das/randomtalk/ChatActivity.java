@@ -212,6 +212,26 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
                     String query = result.get(0);
                     texto.setText(query.toString());
                 }
+            }else if(requestCode == TTS){
+                if (resultCode == TextToSpeech.Engine.CHECK_VOICE_DATA_PASS) {
+                    // success, create the TTS instance
+                    tts=new TextToSpeech(getApplicationContext(),new TextToSpeech.OnInitListener()
+                    {
+                        @Override
+                        public void onInit(int status)
+                        {
+                            tts.setLanguage(Locale.getDefault());
+                            tts.setPitch(1.0f);
+                            tts.setSpeechRate(1f);
+                        }
+                    });
+                } else {
+                    // missing data, install it
+                    Intent installIntent = new Intent();
+                    installIntent.setAction(
+                            TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA);
+                    startActivity(installIntent);
+                }
             }
         }
 
