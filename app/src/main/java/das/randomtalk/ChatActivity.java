@@ -290,7 +290,7 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
             } else {
                 User_contrario_Pais = output.split(":")[1];
             }
-            texto.setText("\n" + User_contrario + getResources().getString(R.string.conectadodesde) + User_contrario_Pais + "\n" + texto.getText().toString());
+            texto.setText("\n" + User_contrario + " " + getResources().getString(R.string.conectadodesde)+ " " + User_contrario_Pais + "\n" + texto.getText().toString());
         }
     }
 
