@@ -102,8 +102,6 @@ public class DoHTTPRequest extends AsyncTask<String, Void, String> {
                 }
                 break;
 
-
-
             default:
                 param = "";
         }

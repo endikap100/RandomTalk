@@ -15,7 +15,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="64dp"
-        android:text="Buscar conversación"
+        android:text="@string/buscar_conversacion"
         android:id="@+id/button3"
         android:layout_gravity="center"
         android:onClick="buscar"

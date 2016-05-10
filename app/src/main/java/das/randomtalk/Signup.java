@@ -28,7 +28,7 @@ public class Signup extends /*AppCompat*/Activity implements DoHTTPRequest.Async
 
     @Override
     public void processFinish(String output, String mReqId) {
-        Toast.makeText(this, "Signup suscesful", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, getResources().getString(R.string.Signupsuscesful), Toast.LENGTH_LONG).show();
         this.finish();
     }
 }

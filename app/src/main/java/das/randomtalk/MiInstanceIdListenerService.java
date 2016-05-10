@@ -53,7 +53,7 @@ public class MiInstanceIdListenerService extends InstanceIDListenerService {
             if(result instanceof  String)
             {
                 String resulatado = (String)result;
-                Toast.makeText(getApplicationContext(), "Registro exitoso. " + resulatado, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), getResources().getString(R.string.Registroexitoso) + resulatado, Toast.LENGTH_SHORT).show();
             }
             else if (result instanceof Exception)//Si el resultado es una Excepcion..hay error
             {

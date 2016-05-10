@@ -122,9 +122,9 @@ public class MainLogin extends /*AppCompat*/Activity implements DoHTTPRequest.As
         LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
         if( !locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("GPS Desactivado");  // GPS not found
-            builder.setMessage("Habilita la localización."); // Want to enable?
-            builder.setPositiveButton("Habilitar", new DialogInterface.OnClickListener() {
+            builder.setTitle(R.string.GPSDesactivado);  // GPS not found
+            builder.setMessage(R.string.Habilitalalocalizacion); // Want to enable?
+            builder.setPositiveButton(R.string.Habilitar, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialogInterface, int i) {
                     getApplicationContext().startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                 }
@@ -139,7 +139,7 @@ public class MainLogin extends /*AppCompat*/Activity implements DoHTTPRequest.As
             try {
                  location = this.getAddress(new LatLng(getLocation().getLatitude(), getLocation().getLongitude()));
             }catch (Exception e){
-                location = "Ubicación desconocida";
+                location = getResources().getString(R.string.Ubicaciondesconocida);
             }
             String rid = getRegistrationId(getApplicationContext());
             String[] datuak = {nombre, password, location,rid};
@@ -155,13 +155,13 @@ public class MainLogin extends /*AppCompat*/Activity implements DoHTTPRequest.As
     @Override
     public void processFinish(String output, String mReqId) {
         if(output.equals("1")) {
-            Toast.makeText(this, "Loged Successfully", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getResources().getString(R.string.LogedSuccessfully), Toast.LENGTH_LONG).show();
             user = ((EditText) findViewById(R.id.name)).getText().toString();
             Intent i = new Intent(this,BuscarActivity.class);
             startActivity(i);
         }
         else{
-            Toast.makeText(this, "Failed Login", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getResources().getString(R.string.FailedLogin), Toast.LENGTH_LONG).show();
         }
     }
 

@@ -32,7 +32,7 @@ public class BuscarActivity extends AppCompatActivity implements DoHTTPRequest.A
     @Override
     public void processFinish(String output, String mReqId) {
         if (output.equals("OK") && mReqId.equals("sendrgid")){
-            Toast.makeText(this,"Estas en la lista de espera... \n\nEn breve se te unira a una sesión",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,getResources().getString(R.string.Estasenlalistadeespera)+" \n\n"+getResources().getString(R.string.Enbreveseteuniraaunasesion),Toast.LENGTH_LONG).show();
             String[] s = {getRegistrationId(this)};
             DoHTTPRequest request = new DoHTTPRequest(BuscarActivity.this , this, "emparejar", -1,s);
             request.execute();

@@ -2,4 +2,32 @@
     <string name="app_name">RandomTalk</string>
     <string name="senderid">349004489598</string>
     <string name="title_activity_buscar">BuscarActivity</string>
+    <string name="GPSDesactivado">GPS Desactivado</string>
+    <string name="Habilitalalocalizacion">Habilita la localización</string>
+    <string name="Habilitar">Habilitar</string>
+    <string name="Ubicaciondesconocida">Ubicación desconocida</string>
+    <string name="LogedSuccessfully">Loged Successfully</string>
+    <string name="FailedLogin">Failed Login</string>
+    <string name="Signupsuscesful">Signup suscesful</string>
+    <string name="Registroexitoso">Registro exitoso. </string>
+    <string name="Estasenlalistadeespera">Estas en la lista de espera...</string>
+    <string name="Enbreveseteuniraaunasesion">En breve se te unira a una sesión</string>
+    <string name="Graciasporactivarlalecturadetexto">¡Gracias por activar la lectura de texto!</string>
+    <string name="Dime">¡Dime!</string>
+    <string name="Nosoportado">No soportado</string>
+    <string name="conectadodesde"> conectado desde </string>
+    <string name="sehadesconectado">se ha desconectado.</string>
+    <string name="keyboardvisible">keyboard visible</string>
+    <string name="keyboardhidden">keyboard hidden</string>
+    <string name="buscar_conversacion">Buscar conversación</string>
+    <string name="send">Send</string>
+    <string name="desconectar">Desconectar</string>
+    <string name="volver">Volver</string>
+    <string name="login">Login</string>
+    <string name="username">Username:</string>
+    <string name="password">Password:</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="email">Email:</string>
+
+
 </resources>

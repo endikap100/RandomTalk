@@ -158,7 +158,7 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
             case R.id.Read:
                 isTTV = !isTTV;
                 if (isTTV){
-                    tts.speak("¡Gracias por activar la lectura de texto!", TextToSpeech.QUEUE_FLUSH, null);
+                    tts.speak(getResources().getString(R.string.Graciasporactivarlalecturadetexto), TextToSpeech.QUEUE_FLUSH, null);
                 }
                 return true;
 
@@ -173,12 +173,12 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
                 RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
-        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "¡Dime!");
+        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, getResources().getString(R.string.Dime));
         try {
             startActivityForResult(intent, REQ_CODE_SPEECH_INPUT);
         } catch (ActivityNotFoundException a) {
             Toast.makeText(getApplicationContext(),
-                    "No soportado",
+                    getResources().getString(R.string.Nosoportado),
                     Toast.LENGTH_SHORT).show();
         }
     }
@@ -286,11 +286,11 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
         }else {
             User_contrario = output.split(":")[0];
             if (output.split(":").length == 1) {
-                User_contrario_Pais = "Ubicación desconocida";
+                User_contrario_Pais = getResources().getString(R.string.Ubicaciondesconocida);
             } else {
                 User_contrario_Pais = output.split(":")[1];
             }
-            texto.setText("\n" + User_contrario + " conectado desde " + User_contrario_Pais + "\n" + texto.getText().toString());
+            texto.setText("\n" + User_contrario + getResources().getString(R.string.conectadodesde) + User_contrario_Pais + "\n" + texto.getText().toString());
         }
     }
 
@@ -301,7 +301,7 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
         super.onStop();
         if(!desconectado) {
             desconectar();
-            Toast.makeText(getApplicationContext(), User_contrario + "se ha desconectado.", Toast.LENGTH_LONG);
+            Toast.makeText(getApplicationContext(), User_contrario + getResources().getString(R.string.sehadesconectado), Toast.LENGTH_LONG);
         }
 
     }
@@ -334,9 +334,9 @@ public class ChatActivity extends AppCompatActivity implements DoHTTPRequest.Asy
 
         // Checks whether a hardware keyboard is available
         if (newConfig.keyboard == Configuration.KEYBOARDHIDDEN_NO) {
-            Toast.makeText(this, "keyboard visible", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getResources().getString(R.string.keyboardvisible), Toast.LENGTH_SHORT).show();
         } else if (newConfig.keyboard == Configuration.KEYBOARDHIDDEN_YES) {
-            Toast.makeText(this, "keyboard hidden", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getResources().getString(R.string.keyboardhidden), Toast.LENGTH_SHORT).show();
         }
     }
 

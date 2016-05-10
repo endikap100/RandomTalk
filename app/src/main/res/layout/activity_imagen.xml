@@ -12,7 +12,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Volver"
+        android:text="@string/volver"
         android:id="@+id/button4"
         android:layout_gravity="center_horizontal"
         android:onClick="volver"/>
