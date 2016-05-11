@@ -6,9 +6,8 @@
     <string name="Habilitalalocalizacion">Habilita la localización</string>
     <string name="Habilitar">Habilitar</string>
     <string name="Ubicaciondesconocida">Ubicación desconocida</string>
-    <string name="LogedSuccessfully">Loged Successfully</string>
-    <string name="FailedLogin">Failed Login</string>
-    <string name="Signupsuscesful">Signup suscesful</string>
+    <string name="LogedSuccessfully">Inicio de sesión correcto</string>
+    <string name="Signupsuscesful">Registro exitoso</string>
     <string name="Registroexitoso">Registro exitoso. </string>
     <string name="Estasenlalistadeespera">Estas en la lista de espera...</string>
     <string name="Enbreveseteuniraaunasesion">En breve se te unira a una sesión</string>
@@ -20,14 +19,15 @@
     <string name="keyboardvisible">keyboard visible</string>
     <string name="keyboardhidden">keyboard hidden</string>
     <string name="buscar_conversacion">Buscar conversación</string>
-    <string name="send">Send</string>
+    <string name="send">Enviar</string>
     <string name="desconectar">Desconectar</string>
     <string name="volver">Volver</string>
-    <string name="login">Login</string>
-    <string name="username">Username:</string>
-    <string name="password">Password:</string>
-    <string name="sign_up">Sign Up</string>
+    <string name="login">Iniciar sesión</string>
+    <string name="username">Alias:</string>
+    <string name="password">Contraseña:</string>
+    <string name="sign_up">Registrarse</string>
     <string name="email">Email:</string>
+    <string name="FailedLogin">Fallo en el inico de sesión</string>
 
 
 </resources>

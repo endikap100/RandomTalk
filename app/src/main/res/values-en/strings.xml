@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">RandomTalk</string>
+    <string name="FailedLogin">Failed Login</string>
+    <string name="LogedSuccessfully">Loged Successfully</string>
+    <string name="Signupsuscesful">Signup suscesful</string>
+    <string name="Registroexitoso">Signup suscesful</string>
+    <string name="email">Email:</string>
+    <string name="keyboardhidden">keyboard hidden</string>
+    <string name="keyboardvisible">keyboard visible</string>
+    <string name="login">Login</string>
+    <string name="password">Password:</string>
+    <string name="send">Send</string>
+    <string name="senderid">349004489598</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="username">Username:</string>
+</resources>
